@@ -1,0 +1,13 @@
+---
+
+- name: Create and configure matterhorn and avalon users
+  include_tasks: users.yml
+
+- name: Create necessary directories
+  include_tasks: setup_dirs.yml
+ 
+- name: Configure Matterhorn
+  include_tasks: config.yml
+
+- name: Setup and start matterhorn
+  include_tasks: start_matterhorn.yml

@@ -1,0 +1,23 @@
+---
+- name: Download and extract matterhorn code
+  unarchive:
+    src: "{{ matterhorn_download }}"
+    dest: /tmp/matterhorn-code
+    remote_src: yes
+
+- name: Check if there's an existing code base
+  stat:
+    path: "{{ matterhorn_user.user_homedir }}"
+    register: matterhorn_homedir_check
+
+- name: Rename extracted code dir to matterhorn path
+  command: mv /tmp/matterhorn-code "{{ matterhorn_user.user_homedir }}"
+  when: not matterhorn_homedir_check.stat.exists
+
+
+- name: Change ownership of matterhorn code to matterhorn user and group
+  file:
+    dest: "{{ matterhorn_user.user_homedir }}"
+    owner: "{{ matterhorn_user.user_name }}"
+    group: "{{ matterhorn_user.user_name }}"
+    recurse: yes

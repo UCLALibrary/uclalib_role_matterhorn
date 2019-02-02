@@ -1,0 +1,15 @@
+---
+- name: Install PHP and required extensions
+  yum:
+    name: "{{ item }}"
+    state: present
+    disable_excludes: all
+  with_items: "{{ php_pkgs }}"
+
+- name: Upload php.ini
+  copy:
+    src: php.ini
+    dest: /etc/php.ini
+    owner: root
+    group: root
+    mode: 0644
