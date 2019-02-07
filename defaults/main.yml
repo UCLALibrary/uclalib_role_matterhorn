@@ -6,6 +6,8 @@ matterhorn_dirs:
     path: /usr/local/masterfiles
   derivatives_dir:
     path: /var/avalon/derivatives
+  scratch_space:
+    path: /tmp/matterhorn-scratch
 
 
 matterhorn_user:
@@ -23,3 +25,8 @@ avalon_user:
   user_homedir: /usr/local/avalon
 
 matterhorn_download: https://github.com/avalonmediasystem/avalon-felix/archive/1.4.x.tar.gz
+
+matterhorn_vers: avalon-felix-1.4.x
+
+ffmpeg_path: /usr/bin/ffmpeg
+streaming_dir: /var/avalon/rtmp_streams

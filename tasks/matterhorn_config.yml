@@ -1,0 +1,42 @@
+---
+- name: Check if there's an existing code base
+  stat:
+    path: "{{ matterhorn_user.user_homedir }}"
+  register: matterhorn_homedir_check
+
+- name: Download and extract matterhorn code
+  unarchive:
+    src: "{{ matterhorn_download }}"
+    dest: "{{ matterhorn_dirs.scratch_space.path }}"
+    remote_src: yes
+  when: not matterhorn_homedir_check.stat.exists
+
+- name: Move code into matterhorn homedir
+  command: mv "{{ matterhorn_dirs.scratch_space.path }}/{{ matterhorn_vers }}" "{{ matterhorn_user.user_homedir }}"
+  when: not matterhorn_homedir_check.stat.exists
+
+- name: Change ownership of matterhorn code to matterhorn user and group
+  file:
+    dest: "{{ matterhorn_user.user_homedir }}"
+    owner: "{{ matterhorn_user.user_name }}"
+    group: "{{ matterhorn_user.user_name }}"
+    recurse: yes
+
+- name: Upload config.properties
+  template:
+    src: config.properties.j2
+    dest: "{{ matterhorn_user.user_homedir }}/etc/config.properties"
+    mode: 0644
+    owner: "{{ matterhorn_user.user_name }}"
+    group: "{{ matterhorn_user.user_name }}"
+
+- name: Upload matterhorn init script
+  copy:
+    src: matterhorn_init.sh
+    dest: /etc/init.d/matterhorn
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Add matterhorn init script to chkconfig
+  command: chkconfig --add matterhorn

@@ -20,6 +20,7 @@
     home: "{{ matterhorn_user.user_homedir }}"
     shell: "{{ matterhorn_user.user_shell }}"
     append: yes
+    create_home: no
     state: present
 
 - name: Create Avalon User
