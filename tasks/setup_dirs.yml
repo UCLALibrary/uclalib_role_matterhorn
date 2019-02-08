@@ -1,0 +1,9 @@
+---
+- name: Create empty directories
+  file: 
+    path: "{{ item.value.path }}"
+    owner: "{{ matterhorn_user.user_name }}"
+    group: "{{ matterhorn_user.user_name }}"
+    mode: 0755
+    state: directory
+  with_dict: "{{ matterhorn_dirs }}"

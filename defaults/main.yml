@@ -1,0 +1,32 @@
+---
+matterhorn_dirs:
+  dropbox:
+    path: /srv/avalon/dropbox
+  masterfiles:
+    path: /usr/local/masterfiles
+  derivatives_dir:
+    path: /var/avalon/derivatives
+  scratch_space:
+    path: /tmp/matterhorn-scratch
+
+
+matterhorn_user:
+  user_name: matterhorn
+  user_uid: 1500
+  user_gid: 1500
+  user_shell: /bin/bash
+  user_homedir: /usr/local/matterhorn
+
+avalon_user:
+  user_name: avalon
+  user_uid: 1501
+  user_gid: 1501
+  user_shell: /bin/bash
+  user_homedir: /usr/local/avalon
+
+matterhorn_download: https://github.com/avalonmediasystem/avalon-felix/archive/1.4.x.tar.gz
+
+matterhorn_vers: avalon-felix-1.4.x
+
+ffmpeg_path: /usr/bin/ffmpeg
+streaming_dir: /var/avalon/rtmp_streams

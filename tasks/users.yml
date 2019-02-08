@@ -1,0 +1,33 @@
+---
+- name: Create Avalon Group
+  group:
+    name: "{{ avalon_user.user_name }}"
+    gid: "{{ avalon_user.user_gid }}"
+    state: present
+
+- name: Create Matterhorn Group
+  group:
+    name: "{{ matterhorn_user.user_name }}"
+    gid: "{{ matterhorn_user.user_gid }}"
+    state: present
+
+- name: Create Matterhorn User
+  user:
+    name: "{{ matterhorn_user.user_name }}"
+    uid: "{{ matterhorn_user.user_uid }}" 
+    group: "{{ matterhorn_user.user_name }}"
+    groups: "{{ avalon_user.user_name }}"
+    home: "{{ matterhorn_user.user_homedir }}"
+    shell: "{{ matterhorn_user.user_shell }}"
+    append: yes
+    create_home: no
+    state: present
+
+- name: Create Avalon User
+  user:
+    name: "{{ avalon_user.user_name }}"
+    uid: "{{ avalon_user.user_uid }}" 
+    group: "{{ avalon_user.user_name }}"
+    home: "{{ avalon_user.user_homedir }}"
+    shell: "{{ avalon_user.user_shell }}"
+    state: present
