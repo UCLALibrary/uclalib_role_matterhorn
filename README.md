@@ -1,6 +1,8 @@
 uclalib_role_matterhorn
 =========
 
+**This role is no longer maintaned and the repo is archived**
+
 Dependencies
 ------------
 
